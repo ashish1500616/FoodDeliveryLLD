@@ -5,13 +5,13 @@ import data.StarRating;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        FoodItem foodItem = new FoodItem.FoodItemBuilder(1, "Cheeseburger", 8.99)
+        System.out.println("LLD - Food Delivery System!");
+        FoodItem foodItem = new FoodItem.FoodItemBuilder(1, "Caesar Salad", 350)
                 .restaurantId(123)
                 .isAvailable(true)
-                .description("Delicious cheeseburger with lettuce, tomato, and pickles")
+                .description("Delicious caesar salad with lettuce, tomato, and cheese")
                 .mealType(MealType.VEG)
-                .cuisineType(CuisineType.AMERICAN)
+                .cuisineType(CuisineType.GREEK)
                 .starRating(StarRating.FIVE)
                 .build();
         if (foodItem.getDescription().isPresent()) {
@@ -21,7 +21,7 @@ public class Main {
 }
 
 /*
-    Approach : Objective is to write maintainable and tested code therefore sum of the system constraints
+    Approach : Objective is to write maintainable and tested code therefore ignoring sum of the system constraints in the real world.
                However, it is important to note that the behavior of the system may vary in different real-world scenarios..
          - Generic Searcher: Implemented as FoodItemSearcherAPI.
          - Returns filtered FoodItems based on applied filters such as MealType, Stars, and Cuisines.
