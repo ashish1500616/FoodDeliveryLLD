@@ -7,21 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemSearcher {
-    List<FoodItem> search(String foodItemName, List<FoodItemFilter> filters) {
-        if (foodItemName == null || foodItemName.isEmpty() || filters == null) {
+    public List<FoodItem> search(String foodItemName, List<FoodItemFilter> foodItemFilters) {
+        if (foodItemName == null || foodItemName.isEmpty() || foodItemFilters == null) {
             throw new IllegalArgumentException();
         }
 
+        // TODO: To be implemented in future versions
         DataAccessResult dataAccessResult = DataAccessor.getFoodItemWithName(foodItemName);
         List<FoodItem> foodItems = DataAccessObjectConverter.convertToFoodItems(dataAccessResult);
 
         // Stream Implementation.
         // List<FoodItem> filteredFoodFromStream = foodItems.stream()
-        // filter(foodItem -> filters.stream().allMatch(filter -> filter.filter(foodItem))).toList();
+        // filter(foodItem -> foodItemFilters.stream().allMatch(filter -> filter.filter(foodItem))).toList();
 
         List<FoodItem> filteredFoodItems = new ArrayList<>();
         // Basic Loop Implementation.
-        for (FoodItemFilter filter : filters) {
+        for (FoodItemFilter filter : foodItemFilters) {
             for (FoodItem foodItem : foodItems) {
                 if (filter.filter(foodItem)) {
                     filteredFoodItems.add(foodItem);
