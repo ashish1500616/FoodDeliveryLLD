@@ -1,13 +1,16 @@
 package business.searchers;
 
 import data.FoodItem;
+import database.DataAccessObjectConverter;
+import database.DataAccessResult;
+import database.DataAccessor;
 import filters.FoodItemFilter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodItemSearcher {
-    public List<FoodItem> search(String foodItemName, List<FoodItemFilter> foodItemFilters) {
+    public List<FoodItem> searchByName(String foodItemName, List<FoodItemFilter> foodItemFilters) {
         if (foodItemName == null || foodItemName.isEmpty() || foodItemFilters == null) {
             throw new IllegalArgumentException();
         }
@@ -30,5 +33,10 @@ public class FoodItemSearcher {
             }
         }
         return filteredFoodItems;
+    }
+
+    public FoodItem searchById(int id) {
+        // TODO: Implement this.
+        return null;
     }
 }

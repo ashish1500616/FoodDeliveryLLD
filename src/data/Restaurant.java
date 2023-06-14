@@ -11,6 +11,8 @@ public class Restaurant {
     private final Optional<CuisineType> cuisineType;
     private final Optional<StarRating> starRating;
 
+    private final Optional<MenuCatalog> menuCatalog;
+
     private Restaurant(RestaurantBuilder builder) {
         this.id = builder.id;
         this.name = builder.name;
@@ -19,6 +21,7 @@ public class Restaurant {
         this.description = builder.description;
         this.cuisineType = builder.cuisineType;
         this.starRating = builder.starRating;
+        this.menuCatalog = builder.menuCatalog;
     }
 
     public String getName() {
@@ -57,6 +60,7 @@ public class Restaurant {
         private Optional<String> description = Optional.empty();
         private Optional<CuisineType> cuisineType = Optional.empty();
         private Optional<StarRating> starRating = Optional.empty();
+        private Optional<MenuCatalog> menuCatalog = Optional.empty();
 
         public RestaurantBuilder(int id, String name) {
             this.id = id;
@@ -85,6 +89,11 @@ public class Restaurant {
 
         public RestaurantBuilder starRating(StarRating starRating) {
             this.starRating = Optional.ofNullable(starRating);
+            return this;
+        }
+
+        public RestaurantBuilder menuCatalog(MenuCatalog menuCatalog) {
+            this.menuCatalog = Optional.ofNullable(menuCatalog);
             return this;
         }
 

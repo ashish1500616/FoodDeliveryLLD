@@ -1,13 +1,16 @@
 package business.searchers;
 
 import data.Restaurant;
+import database.DataAccessObjectConverter;
+import database.DataAccessResult;
+import database.DataAccessor;
 import filters.RestaurantFilter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantSearcher {
-    public List<Restaurant> search(String restaurantName, List<RestaurantFilter> restaurantFilters) {
+    public List<Restaurant> searchByName(String restaurantName, List<RestaurantFilter> restaurantFilters) {
         if (restaurantName == null || restaurantFilters == null || restaurantName.isEmpty() || restaurantFilters.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -30,5 +33,10 @@ public class RestaurantSearcher {
             }
         }
         return filteredRestaurants;
+    }
+
+    public Restaurant searchById(int id) {
+        // TODO: Implement this.
+        return null;
     }
 }

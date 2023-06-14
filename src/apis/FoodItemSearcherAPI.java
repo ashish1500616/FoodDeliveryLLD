@@ -19,6 +19,7 @@ public class FoodItemSearcherAPI {
                                           List<CuisineType> cuisines,
                                           StarRating starRatings) {
         List<FoodItemFilter> foodItemFilters = new ArrayList<>();
+        // TODO : Implement Factory Pattern to create these objects
         if (mealType != null) {
             foodItemFilters.add(new MealTypeFilter(mealType));
         }
@@ -28,6 +29,6 @@ public class FoodItemSearcherAPI {
         if (starRatings != null) {
             foodItemFilters.add(new StarRatingFilter(starRatings));
         }
-        return new FoodItemSearcher().search(foodItemName, foodItemFilters);
+        return new FoodItemSearcher().searchByName(foodItemName, foodItemFilters);
     }
 }

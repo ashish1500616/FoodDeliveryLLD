@@ -16,6 +16,7 @@ import java.util.List;
 public class RestaurantSearcherAPI {
     public List<Restaurant> searchRestaurants(String restaurantName, MealType mealType, List<CuisineType> cuisines, StarRating starRatings) {
         List<RestaurantFilter> restaurantFilters = new ArrayList<>();
+        // TODO: Implement factory pattern here.
         if (mealType != null) {
             restaurantFilters.add(new MealTypeFilter(mealType));
         }
@@ -25,6 +26,6 @@ public class RestaurantSearcherAPI {
         if (starRatings != null) {
             restaurantFilters.add(new StarRatingFilter(starRatings));
         }
-        return new RestaurantSearcher().search(restaurantName, restaurantFilters);
+        return new RestaurantSearcher().searchByName(restaurantName, restaurantFilters);
     }
 }
