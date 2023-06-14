@@ -8,4 +8,12 @@ public class CartItem {
         this.foodItem = foodItem;
         this.quanity = quanity;
     }
+
+    public FoodItem getFoodItem() {
+        return foodItem;
+    }
+
+    public int getQuanity() {
+        return quanity;
+    }
 }

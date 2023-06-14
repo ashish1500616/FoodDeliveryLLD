@@ -52,6 +52,7 @@ public class Restaurant {
         return starRating;
     }
 
+
     public static class RestaurantBuilder {
         private final int id;
         private final String name;
