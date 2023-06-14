@@ -3,6 +3,8 @@ package managers;
 import data.CartItem;
 import data.FoodItem;
 import data.User;
+import database.DataAccessObjectConverter;
+import database.DataAccessResult;
 import database.DataAccessor;
 import factory.PermissionFactory;
 import permission.Permission;
@@ -12,7 +14,9 @@ import java.util.List;
 public class CartManager {
 
     public List<CartItem> getUserCart(User user) {
-        return List.of();
+        DataAccessResult cartByUser = DataAccessor.getCartByUser(user);
+        List<CartItem> cartItems = DataAccessObjectConverter.convertToCartItems(cartByUser);
+        return cartItems;
     }
 
     public void addItemToCart(User user, FoodItem foodItem) {
@@ -29,11 +33,34 @@ public class CartManager {
     }
 
     public void deleteItemFromCart(User user, FoodItem foodItem) {
-
+        Permission deleteFromCartPermission = PermissionFactory.getDeleteFromCartPermission(user, foodItem);
+        if (!deleteFromCartPermission.isPermitted()) {
+            throw new RuntimeException("Deletion from this cart not allowed.");
+        }
+        if (!isFoodItemPresentInCart(user, foodItem)) {
+            throw new RuntimeException("Fooditem not in cart.");
+        }
     }
 
-    public void checkoutUserCart(User user) {
+    private boolean isFoodItemPresentInCart(User user, FoodItem foodItem) {
+        List<CartItem> userCart = getUserCart(user);
+        return userCart.stream().anyMatch(cartItem -> cartItem.getFoodItem().getId() == foodItem.getId());
+    }
 
+    public void checkOutUserCart(User user) {
+        Permission checkoutFromCartPermission = PermissionFactory.getCheckoutFromCartPermission(user);
+        if (!checkoutFromCartPermission.isPermitted()) {
+            throw new RuntimeException("Permission Denied !!!! . Checkout for this user is not allowed!");
+        }
+        if (isCartEmpty(user)) {
+            throw new RuntimeException("Checkout Denied !!! , No Item in the cart.");
+        }
+        DataAccessor.checkOutCart(user);
+    }
+
+    private boolean isCartEmpty(User user) {
+        List<CartItem> userCart = getUserCart(user);
+        return userCart.isEmpty();
     }
 
     private boolean isFoodItemFromSameRestaurant(User user, FoodItem foodItem) {
@@ -53,4 +80,5 @@ public class CartManager {
      R,W,RW,,REX , etc.
      Permission: abstract
      User , Permission
+     if payment has succeeded create an order in the order table.
  */
