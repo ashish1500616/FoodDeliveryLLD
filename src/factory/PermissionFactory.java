@@ -2,10 +2,7 @@ package factory;
 
 import data.FoodItem;
 import data.User;
-import permission.AddToCartPermission;
-import permission.CheckoutCartPermission;
-import permission.DeleteFromCartPermission;
-import permission.Permission;
+import permission.*;
 
 public class PermissionFactory {
 
@@ -22,5 +19,13 @@ public class PermissionFactory {
 
     public static Permission getCheckoutFromCartPermission(User user) {
         return new CheckoutCartPermission(user);
+    }
+
+    public static Permission getPlaceOrderPermission(User user) {
+        return new PlaceOrderPermission(user);
+    }
+
+    public static Permission getUpdateOrderPermission(User user) {
+        return new UpdateOrderPermission(user);
     }
 }

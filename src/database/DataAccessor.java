@@ -1,7 +1,10 @@
 package database;
 
+import data.CartItem;
 import data.FoodItem;
 import data.User;
+
+import java.util.List;
 
 public class DataAccessor {
 
@@ -33,5 +36,11 @@ public class DataAccessor {
     }
 
     public static void checkOutCart(User user) {
+        return;
+    }
+
+    public static int createOrder(User user, List<CartItem> cartItem) {
+        // returns orderId
+        return 1;
     }
 }

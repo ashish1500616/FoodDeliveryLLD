@@ -15,4 +15,8 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
+    public int getId() {
+        return id;
+    }
 }
